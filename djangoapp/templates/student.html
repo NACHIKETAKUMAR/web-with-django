@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>STUDENT FORM</title>
+{% load static %}
+<script src="{% static 'js/jquery-3.4.1.js' %}"></script>
+</head>
+<body>
+<form method="post" id="student-form">
+{% csrf_token %}
+{{form.as_p}}
+<ul id="student">
+</ul>
+<input type="submit" value="ADD STUDENT">
+</form>
+<script>
+$('#student-form').on('submit', function(event){
+ event.preventDefault();
+ console.log("form submitted!")
+ createstudent();
+});
+// AJAX for posting
+function createstudent() {
+ console.log("create student is working!")
+ $.ajax({
+ url : "/createstudent/", // the endpoint
+ type : "POST", // http method
+ data : { 'fname': $('#fname').val(),
+'lname': $('#lname').val(),
+'age': $('#age').val(),
+'email': $('#email').val(),
+'csrfmiddlewaretoken':$(
+"input[name='csrfmiddlewaretoken']" ).val()
+},// data sent with the post request
+ // handle a successful response
+ success : function(json) {
+ $('#fname').val('');
+$('#lname').val('');
+    $('#age').val('');
+$('#email').val(''); // remove the value from the
+input
+
+$("#student").append("<li><strong>"+json.fname+"</stro
+ng> - <em> "+json.lname+"</em> - <span> "+json.age+"</span>");
+console.log("success");
+},
+ });
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>students list</title>
+    <script>
+        function check()
+        {
+        var result=confirm('do you want to delete the record');
+        if(result=true)
+           return true;
+        else
+           return false;
+           }
+
+
+    </script>
+</head>
+<body>
+<table border="1px" align="center" cellpadding="10px" cellspacing="0px">
+    <tr>
+        <th>
+            first name
+        </th>
+        <th>last name</th>
+        <th>email</th>
+        <th>
+            date of birth
+        </th>
+        <th>age</th>
+        <th colspan="2">action</th>
+    </tr>
+    {% for s in students %}
+    <tr>
+        <td>{{ s.Fname }}</td>
+        <td>{{s.lname }}</td>
+        <td>{{s.email}}</td>
+        <td>{{s.dob}}</td>
+        <td>{{s.age}}</td>
+        <td><a href="/editStudent/{{s.id}}/">edit</a> </td>
+        <td><a href="/deleteStudent/{{s.id}}/"
+        onclick="return check()">delete</a> </td>
+
+
+    </tr>
+    {% endfor %}
+
+</table>
+<center>
+    <a href="/createStudent/">add new student</a>
+</center>
+</body>
+</html>

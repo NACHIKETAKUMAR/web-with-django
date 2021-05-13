@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add student</title>
+</head>
+<body>
+<form method="post">
+    {% csrf_token %}
+    <table border="1px" align="center" cellpadding="10px" cellspacing="0px">
+        {{ form.as_table }}
+
+    </table>
+    <button type="submit">save</button>
+</form>
+
+</body>
+</html>
